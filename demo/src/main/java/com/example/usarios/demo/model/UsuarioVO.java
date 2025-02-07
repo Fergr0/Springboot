@@ -1,0 +1,23 @@
+package com.example.usarios.demo.model;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+@Document
+public class UsuarioVO {
+	
+	@Id
+	private String id;
+    private final String nombre;
+    private final String apellido;
+    private final String calle;
+    private final String codPostal;
+    private final String ciudad;
+    private final String cumpleanos;
+
+}
