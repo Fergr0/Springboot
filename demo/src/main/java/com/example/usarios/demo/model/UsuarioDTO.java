@@ -12,11 +12,11 @@ import lombok.Setter;
 public class UsuarioDTO {
 	
 	private String id;
-    private final String nombre;
-    private final String apellido;
-    private final String calle;
-    private final String codPostal;
-    private final String ciudad;
-    private final String cumpleanos;
+    private String nombre;
+    private String apellido;
+    private String calle;
+    private String codPostal;
+    private String ciudad;
+    private String cumpleanos;
 
 }
