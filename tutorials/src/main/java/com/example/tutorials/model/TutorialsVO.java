@@ -6,8 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Document(collection = "tutorials")
 public class TutorialsVO {
     @Id

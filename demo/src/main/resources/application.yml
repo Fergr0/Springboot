@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: demo
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    mongodb:
+      database: tutorialsservice_db
+      port: 27017
+
+server:
+  port: 8081
