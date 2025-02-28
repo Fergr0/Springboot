@@ -1,12 +1,12 @@
-spring:
-  application:
-    name: demo
-  main:
-    allow-bean-definition-overriding: true
-  data:
-    mongodb:
-      database: tutorialsservice_db
-      port: 27017
-
 server:
   port: 8081
+
+spring:
+  application:
+    name: tutorialsService
+
+  data:
+    mongodb:
+      host: mongo_DB   # Usa el nombre del servicio en docker-compose
+      port: 27017      # Puerto correcto de MongoDB
+      database: tutorialsservice_db  # Nombre correcto de la base de datos

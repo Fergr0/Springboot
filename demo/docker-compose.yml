@@ -1,0 +1,38 @@
+networks:
+ mired:
+  ipam:
+   config:
+    - subnet: 182.28.0.0/16
+      gateway: 182.28.0.1
+
+services:
+ db:
+  image: bitnami/mongodb:latest
+  container_name: mongo_DB
+  networks:
+   mired:
+    ipv4_address: 182.28.0.11
+  ports:
+   - "27017:27017"
+  expose:
+   - 27017
+  healthcheck:  # Agregado para evitar que app-contactos falle si MongoDB no está listo
+   test: ["CMD", "mongosh", "--eval", "db.runCommand('ping').ok"]
+   interval: 10s
+   timeout: 5s
+   retries: 5
+   start_period: 10s
+
+ app-contactos:
+  image: fergr01/agenda-contactos:1  # Cambiado a la imagen correcta
+  container_name: contactosapp
+  networks:
+   mired:
+    ipv4_address: 182.28.0.13
+  expose:
+   - 81
+  ports:
+   - "81:8081"
+  depends_on:
+   db:
+    condition: service_healthy  #Ahora esperará a que MongoDB esté listo antes de iniciarse
