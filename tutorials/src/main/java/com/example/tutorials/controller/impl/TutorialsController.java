@@ -20,6 +20,7 @@ public class TutorialsController {
 
 
     @CrossOrigin //F!* CORS@PostMapping("/tutorials")
+    @PostMapping("/tutorials")
     public TutorialsDto save(@RequestBody TutorialsDto tutorialDto) {
         return tutorialsService.save(tutorialDto);
     }
