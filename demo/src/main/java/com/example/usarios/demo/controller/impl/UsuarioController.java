@@ -66,7 +66,7 @@ public class UsuarioController implements UsuariosAPI {
     public UsuarioDTO save(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario a guardar", required = true,
                     content = @Content(schema = @Schema(implementation = UsuarioDTO.class)))
-            @RequestBody UsuarioDTO usuarioDTO) {  // SOLO QUEDA LA ANOTACIÓN DE SPRING
+            @RequestBody UsuarioDTO usuarioDTO) {
         return usuarioService.save(usuarioDTO);
     }
 
@@ -85,9 +85,26 @@ public class UsuarioController implements UsuariosAPI {
             @PathVariable String id,
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario actualizados", required = true,
                     content = @Content(schema = @Schema(implementation = UsuarioDTO.class)))
-            @RequestBody UsuarioDTO usuarioDTO) {  // SOLO QUEDA LA ANOTACIÓN DE SPRING
+            @RequestBody UsuarioDTO usuarioDTO) {
         usuarioDTO.setId(id);
         UsuarioDTO updatedUsuario = usuarioService.updateUsuario(usuarioDTO);
+        return updatedUsuario != null ? ResponseEntity.ok(updatedUsuario) : ResponseEntity.notFound().build();
+    }
+
+    /**
+     * Asigna tutoriales a un usuario.
+     */
+    @Operation(summary = "Asignar tutoriales a un usuario", description = "Asocia una lista de tutoriales a un usuario existente")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Tutoriales asignados exitosamente"),
+        @ApiResponse(responseCode = "404", description = "Usuario no encontrado")
+    })
+    @PutMapping("/usuarios/{id}/tutoriales")
+    @Override
+    public ResponseEntity<UsuarioDTO> addTutorialsToUser(
+            @PathVariable String id,
+            @RequestBody List<String> tutorialIds) {
+        UsuarioDTO updatedUsuario = usuarioService.addTutorialsToUser(id, tutorialIds);
         return updatedUsuario != null ? ResponseEntity.ok(updatedUsuario) : ResponseEntity.notFound().build();
     }
 

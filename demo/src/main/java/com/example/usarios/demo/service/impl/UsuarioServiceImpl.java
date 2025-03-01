@@ -54,7 +54,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             UsuarioVO updatedUsuario = usuarioRepository.save(usuarioVO);
             return UsuarioMapper.toDTO(updatedUsuario);
         }
-        return null; // Manejar mejor con excepciones
+        return null;
     }
 
     @Override
@@ -70,5 +70,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     public ResponseEntity<Void> deleteAllUsuarios() {
         usuarioRepository.deleteAll();
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public UsuarioDTO addTutorialsToUser(String userId, List<String> tutorialIds) {
+        Optional<UsuarioVO> usuarioOpt = usuarioRepository.findById(userId);
+        if (usuarioOpt.isPresent()) {
+            UsuarioVO usuario = usuarioOpt.get();
+            usuario.setTutorialIds(tutorialIds);
+            usuarioRepository.save(usuario);
+            return UsuarioMapper.toDTO(usuario);
+        }
+        return null;
     }
 }

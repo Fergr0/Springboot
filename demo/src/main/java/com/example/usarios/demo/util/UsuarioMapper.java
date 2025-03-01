@@ -2,15 +2,11 @@ package com.example.usarios.demo.util;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.example.usarios.demo.model.UsuarioDTO;
 import com.example.usarios.demo.model.UsuarioVO;
 
 public class UsuarioMapper {
 
-    /**
-     * Convierte un UsuarioVO a UsuarioDTO
-     */
     public static UsuarioDTO toDTO(UsuarioVO vo) {
         if (vo == null) {
             return null;
@@ -23,12 +19,10 @@ public class UsuarioMapper {
                 .codPostal(vo.getCodPostal())
                 .ciudad(vo.getCiudad())
                 .cumpleanos(vo.getCumpleanos())
+                .tutorialIds(vo.getTutorialIds()) // 🔹 Mapear tutorialIds
                 .build();
     }
 
-    /**
-     * Convierte un UsuarioDTO a UsuarioVO
-     */
     public static UsuarioVO toVO(UsuarioDTO dto) {
         if (dto == null) {
             return null;
@@ -41,12 +35,10 @@ public class UsuarioMapper {
                 .codPostal(dto.getCodPostal())
                 .ciudad(dto.getCiudad())
                 .cumpleanos(dto.getCumpleanos())
+                .tutorialIds(dto.getTutorialIds()) // 🔹 Mapear tutorialIds
                 .build();
     }
 
-    /**
-     * Convierte una lista de UsuarioVO a una lista de UsuarioDTO
-     */
     public static List<UsuarioDTO> toDTOList(List<UsuarioVO> voList) {
         if (voList == null) {
             return null;
@@ -54,9 +46,6 @@ public class UsuarioMapper {
         return voList.stream().map(UsuarioMapper::toDTO).collect(Collectors.toList());
     }
 
-    /**
-     * Convierte una lista de UsuarioDTO a una lista de UsuarioVO
-     */
     public static List<UsuarioVO> toVOList(List<UsuarioDTO> dtoList) {
         if (dtoList == null) {
             return null;
