@@ -1,12 +1,13 @@
 server:
-  port: 8080
+  port: 8080  # Puerto donde corre la aplicación
 
 spring:
   application:
     name: tutorialsService
+
   main:
     allow-bean-definition-overriding: true
+
   data:
     mongodb:
-      database: tutorialsservice_db
-      port: 27017
+      uri: mongodb+srv://usuario:usuario@agenda.c9ooj.mongodb.net/tutorialsservice_db?retryWrites=true&w=majority

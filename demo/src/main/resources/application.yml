@@ -10,6 +10,5 @@ spring:
 
   data:
     mongodb:
-      host: localhost  # Si está en Docker, usar el nombre del servicio en docker-compose
-      port: 27017
+      uri: mongodb+srv://usuario:usuario@agenda.c9ooj.mongodb.net/?retryWrites=true&w=majority&appName=Agenda
       database: tutorialsservice_db

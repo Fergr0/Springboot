@@ -1,0 +1,42 @@
+version: '3.8'
+
+networks:
+ mired:
+  ipam:
+   config:
+    - subnet: 182.28.0.0/16
+      gateway: 182.28.0.1
+
+services:
+ db:
+  image: bitnami/mongodb:latest
+  container_name: mongo_DB
+  networks:
+   mired:
+    ipv4_address: 182.28.0.11
+  ports:
+   - "27017:27017"
+  expose:
+   - 27017
+  healthcheck:
+   test: ["CMD", "mongosh", "--eval", "db.runCommand('ping').ok"]
+   interval: 10s
+   timeout: 5s
+   retries: 5
+   start_period: 10s
+
+ app-tutorials:
+  image: fergr01/tutorials2025:1
+  container_name: tutorialsapp
+  networks:
+   mired:
+    ipv4_address: 182.28.0.12
+  expose:
+   - 80
+  ports:
+   - "80:8080"  # Antes tenías "80:8080", ahora está corregido
+  depends_on:
+   db:
+    condition: service_healthy
+  environment:
+   SPRING_DATA_MONGODB_URI: mongodb://mongo_DB:27017/tutorialsDB
